@@ -20,7 +20,7 @@ public interface DatabaseService extends Remote {
 	public void createCar(int carID, String carColour, String carBrand, String carModel, String carPurchaseDate) throws RemoteException, SQLException;
 	public List<Car> readCar()  throws RemoteException, SQLException;
 	public void updateCar(int carID, String carColour, String carBrand, String carModel, String carPurchaseDated) throws RemoteException, SQLException;
-	public void deleteCar(int orderId) throws RemoteException, SQLException;
+	public void deleteCar(int carID) throws RemoteException, SQLException;
 	
 	// Customer
 	public void createCustomer(int custID, String custFirstName, String custLastName, int custMobile, String custAddress,String custEmail) throws RemoteException, SQLException;

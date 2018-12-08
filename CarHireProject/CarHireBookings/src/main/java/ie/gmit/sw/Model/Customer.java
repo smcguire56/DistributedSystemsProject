@@ -41,14 +41,15 @@ import javax.xml.bind.annotation.XmlType;
  * 
  * 
  */
+//  custID | cust_firstName | cust_lastName | cust_mobile | cust_address | cust_email
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "custID",
-    "custFirstName",
-    "custLastName",
-    "custMobile",
-    "custAddress",
-    "custEmail"
+    "cust_firstName",
+    "cust_lastName",
+    "cust_mobile",
+    "cust_address",
+    "cust_email"
 })
 @XmlRootElement(name = "Customer")
 public class Customer implements Serializable {

@@ -45,10 +45,10 @@ import java.util.Date;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "carID",
-    "carColour",
-    "carBrand",
-    "carModel",
-    "carPurchaseDate"
+    "car_colour",
+    "car_brand",
+    "car_model",
+    "car_PurchaseDate"
 })
 @XmlRootElement(name = "Car")
 public class Car implements Serializable {

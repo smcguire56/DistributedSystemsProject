@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import ie.gmit.sw.Model.Car;
+import ie.gmit.sw.Model.Customer;
 import ie.gmit.sw.Model.Order;
 
 public class DatabaseServiceImpl extends UnicastRemoteObject implements DatabaseService {
@@ -26,6 +28,10 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/carbookingsql?useSSL=false", "root", "");
 
 	}
+
+	// ###############################################################################################################################
+	// ORDER
+	// ###############################################################################################################################
 
 	@Override
 	public void createOrder(int orderId, String date, int custId, int carId) throws RemoteException, SQLException {
@@ -64,7 +70,8 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 	}
 
 	@Override
-	public void updateOrder(int orderId, int custId, int carId, String date) throws RemoteException, SQLException { // update date
+	public void updateOrder(int orderId, int custId, int carId, String date) throws RemoteException, SQLException { // update
+																													// date
 
 		System.out.println("Order ID: " + orderId);
 		System.out.println("Customer ID: " + custId);
@@ -91,55 +98,141 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 		p.close();
 	}
 
+	// ###############################################################################################################################
+	// CAR
+	// ###############################################################################################################################
+
 	@Override
-	public void createCar(int carID, String carColour, String carBrand, String carModel, Date carPurchaseDate)
+	public void createCar(int carID, String carColour, String carBrand, String carModel, String carPurchaseDate)
 			throws RemoteException, SQLException {
-		// TODO Auto-generated method stub
-		
+		String sql = "insert into Orders(carID, carColour, carBrand, carModel, carPurchaseDate) values (?,?, ?, ?)";
+
+		PreparedStatement p = conn.prepareStatement(sql);
+		p.setInt(1, carID);
+		p.setString(2, carColour);
+		p.setString(3, carBrand);
+		p.setString(4, carModel);
+		p.setString(5, carPurchaseDate);
+		p.execute();
+		p.close();
 	}
 
 	@Override
-	public List<Order> readCar() throws RemoteException, SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Car> readCar() throws RemoteException, SQLException {
+
+		statement = conn.createStatement();
+		List<Car> list = new ArrayList<>();
+
+		String str = "select * from car order by carID";
+
+		ResultSet results = statement.executeQuery(str);
+		// carID | car_colour | car_brand | car_model | car_PurchaseDate
+		while (results.next()) {
+			int carID = results.getInt("carID");
+			String carColour = results.getString("car_colour");
+			String carBrand = results.getString("car_brand");
+			String carModel = results.getString("car_model");
+			Date carPurchaseDate = results.getDate("car_PurchaseDate");
+
+			Car s = new Car(carID, carColour, carBrand, carModel, carPurchaseDate);
+			list.add(s);
+		}
+
+		return list;
 	}
 
 	@Override
-	public void updateCar(int carID, String carColour, String carBrand, String carModel, Date carPurchaseDated)
+	public void updateCar(int carID, String carColour, String carBrand, String carModel, String carPurchaseDated)
 			throws RemoteException, SQLException {
-		// TODO Auto-generated method stub
-		
+		// carID | car_colour | car_brand | car_model | car_PurchaseDate
+
+		String sql = "UPDATE Car SET car_colour = ?, car_brand = ?, car_model = ?, car_PurchaseDate = ? WHERE carID = ?";
+
+		PreparedStatement p = conn.prepareStatement(sql);
+		p.setString(1, carColour);
+		p.setString(2, carBrand);
+		p.setString(3, carModel);
+		p.setString(4, carPurchaseDated);
+		p.setInt(5, carID);
+		p.execute();
+		p.close();
 	}
 
 	@Override
 	public void deleteCar(int orderId) throws RemoteException, SQLException {
-		// TODO Auto-generated method stub
-		
+
+		PreparedStatement p = conn.prepareStatement("DELETE FROM Car WHERE carID = ?");
+		p.setInt(1, orderId);
+		p.executeUpdate();
+		p.close();
+	}
+
+	// ###############################################################################################################################
+	// CUSTOMER
+	// ###############################################################################################################################
+
+	@Override
+	public List<Customer> readCustomer() throws RemoteException, SQLException {
+		statement = conn.createStatement();
+		List<Customer> list = new ArrayList<>();
+
+		String str = "select * from customers order by custID";
+
+		ResultSet results = statement.executeQuery(str);
+		//  custID | cust_firstName | cust_lastName | cust_mobile | cust_address | cust_email
+		while (results.next()) {
+			int custID = results.getInt("custID");
+			String custFirstName = results.getString("cust_firstName");
+			String custLastName = results.getString("cust_lastName");
+			int custMobile = results.getInt("cust_mobile");
+			String custAddress = results.getString("cust_address");
+			String custEmail = results.getString("cust_email");
+
+			Customer s = new Customer(custID, custFirstName, custLastName, custMobile, custAddress, custEmail);
+			list.add(s);
+		}
+
+		return list;
 	}
 
 	@Override
-	public void createCustomer(String d, int custId, int carId) throws RemoteException, SQLException {
-		// TODO Auto-generated method stub
-		
+	public void deleteCustomer(int custID) throws RemoteException, SQLException {
+		PreparedStatement p = conn.prepareStatement("DELETE FROM Customers WHERE custID = ?");
+		p.setInt(1, custID);
+		p.executeUpdate();
+		p.close();
 	}
 
 	@Override
-	public List<Order> readCustomer() throws RemoteException, SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public void createCustomer(int custID, String custFirstName, String custLastName, int custMobile,
+			String custAddress, String custEmail) throws RemoteException, SQLException {
+		String sql = "insert into Customers(custID, custFirstName, custLastName, custMobile, custAddress, custEmail) values (?,?, ?, ?, ?)";
+
+		PreparedStatement p = conn.prepareStatement(sql);
+		p.setInt(1, custID);
+		p.setString(2, custFirstName);
+		p.setString(3, custLastName);
+		p.setInt(4, custMobile);
+		p.setString(5, custAddress);
+		p.setString(6, custEmail);
+		p.execute();
+		p.close();
 	}
 
 	@Override
-	public void updateCustomer(int orderId, int custId, int carId) throws RemoteException, SQLException {
-		// TODO Auto-generated method stub
-		
-	}
+	public void updateCustomer(int custID, String custFirstName, String custLastName, int custMobile,
+			String custAddress, String custEmail) throws RemoteException, SQLException {
+		String sql = "UPDATE Customers SET custFirstName = ?, custLastName = ?, custMobile = ?, custAddress = ?, custEmail = ? WHERE custID = ?";
 
-	@Override
-	public void deleteCustomer(int orderId) throws RemoteException, SQLException {
-		// TODO Auto-generated method stub
-		
+		PreparedStatement p = conn.prepareStatement(sql);
+		p.setString(1, custFirstName);
+		p.setString(2, custLastName);
+		p.setInt(3, custMobile);
+		p.setString(4, custAddress);
+		p.setString(5, custEmail);
+		p.setInt(6, custID);
+		p.execute();
+		p.close();
 	}
-
 
 }

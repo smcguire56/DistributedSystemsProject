@@ -2,9 +2,10 @@ package ie.gmit.sw.CarHireBookings;
 
 import java.rmi.*;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.List;
 
+import ie.gmit.sw.Model.Car;
+import ie.gmit.sw.Model.Customer;
 import ie.gmit.sw.Model.Order;
 
 public interface DatabaseService extends Remote {
@@ -16,17 +17,15 @@ public interface DatabaseService extends Remote {
 	public void deleteOrder(int orderId) throws RemoteException, SQLException;
 
 	// Car 	
-	public void createCar(int carID, String carColour, String carBrand, String carModel, Date carPurchaseDate) throws RemoteException, SQLException;
-	public List<Order> readCar()  throws RemoteException, SQLException;
-	public void updateCar(int carID, String carColour, String carBrand, String carModel, Date carPurchaseDated) throws RemoteException, SQLException;
-	public void deleteCar(int orderId) throws RemoteException, SQLException;
-		
-	
+	public void createCar(int carID, String carColour, String carBrand, String carModel, String carPurchaseDate) throws RemoteException, SQLException;
+	public List<Car> readCar()  throws RemoteException, SQLException;
+	public void updateCar(int carID, String carColour, String carBrand, String carModel, String carPurchaseDated) throws RemoteException, SQLException;
+	public void deleteCar(int carID) throws RemoteException, SQLException;
 	
 	// Customer
-	public void createCustomer(String d, int custId, int carId) throws RemoteException, SQLException;
-	public List<Order> readCustomer()  throws RemoteException, SQLException;
-	public void updateCustomer(int orderId, int custId, int carId) throws RemoteException, SQLException;
-	public void deleteCustomer(int orderId) throws RemoteException, SQLException;
+	public void createCustomer(int custID, String custFirstName, String custLastName, int custMobile, String custAddress,String custEmail) throws RemoteException, SQLException;
+	public List<Customer> readCustomer()  throws RemoteException, SQLException;
+	public void updateCustomer(int custID, String custFirstName, String custLastName, int custMobile, String custAddress,String custEmail) throws RemoteException, SQLException;
+	public void deleteCustomer(int custID) throws RemoteException, SQLException;
 		
 }
