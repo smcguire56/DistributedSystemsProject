@@ -1,4 +1,4 @@
-Create DATABASE CarBookingSQL;
+	Create DATABASE CarBookingSQL;
 
 USE CarBookingSQL;
 

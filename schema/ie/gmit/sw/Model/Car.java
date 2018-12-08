@@ -14,8 +14,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
-
-import java.io.Serializable;
 import java.util.Date;
 
 
@@ -51,10 +49,9 @@ import java.util.Date;
     "carPurchaseDate"
 })
 @XmlRootElement(name = "Car")
-public class Car implements Serializable {
+public class Car {
 
-	private static final long serialVersionUID = 1L;
-	protected int carID;
+    protected int carID;
     @XmlElement(name = "car_colour", required = true)
     protected String carColour;
     @XmlElement(name = "car_brand", required = true)
@@ -64,23 +61,8 @@ public class Car implements Serializable {
     @XmlElement(name = "car_PurchaseDate", required = true)
     @XmlSchemaType(name = "date")
     protected Date carPurchaseDate;
-    
-    
 
-    public Car() {
-		super();
-	}
-
-	public Car(int carID, String carColour, String carBrand, String carModel, Date carPurchaseDate) {
-		super();
-		this.carID = carID;
-		this.carColour = carColour;
-		this.carBrand = carBrand;
-		this.carModel = carModel;
-		this.carPurchaseDate = carPurchaseDate;
-	}
-
-	/**
+    /**
      * Gets the value of the carID property.
      * 
      */

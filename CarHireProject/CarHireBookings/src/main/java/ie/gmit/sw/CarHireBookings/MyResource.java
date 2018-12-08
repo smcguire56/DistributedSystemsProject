@@ -14,28 +14,22 @@ import javax.ws.rs.core.MediaType;
 
 import ie.gmit.sw.Model.Order;
 
-/**
- * Root resource (exposed at "myresource" path)
- */
 @Path("myresource")
 public class MyResource {
 
-    /**
-     * Method handling HTTP GET requests. The returned object will be sent
-     * to the client as "text/plain" media type.
-     *
-     * @return String that will be returned as a text/plain response.
-     * @throws NotBoundException 
-     * @throws RemoteException 
-     * @throws MalformedURLException 
-     * @throws SQLException 
-     */
-    @GET
-    @Produces(MediaType.APPLICATION_XML)
-    public List<Order> getIt() throws MalformedURLException, RemoteException, NotBoundException, SQLException {
-    	
-    	DatabaseService s = (DatabaseService) Naming.lookup("rmi://127.0.0.1:1099/Service");
-    	
-        return s.read();
-    }
+	@GET
+	@Produces(MediaType.APPLICATION_XML)
+	public List<Order> getIt() throws MalformedURLException, RemoteException, NotBoundException, SQLException {
+
+		DatabaseService s = (DatabaseService) Naming.lookup("rmi://127.0.0.1:1099/Service");
+
+		s.createOrder(2, "2011-12-17", 2, 3);
+
+		s.deleteOrder(2);
+
+		s.updateOrder(1, 1, 2, "1997-09-02");
+
+		return s.readOrder();
+	}
+
 }

@@ -8,8 +8,6 @@
 
 package ie.gmit.sw.Model;
 
-import java.io.Serializable;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -51,10 +49,9 @@ import javax.xml.bind.annotation.XmlType;
     "custEmail"
 })
 @XmlRootElement(name = "Customer")
-public class Customer implements Serializable {
+public class Customer {
 
-	private static final long serialVersionUID = 1L;
-	protected int custID;
+    protected int custID;
     @XmlElement(name = "cust_firstName", required = true)
     protected String custFirstName;
     @XmlElement(name = "cust_lastName", required = true)
@@ -66,23 +63,7 @@ public class Customer implements Serializable {
     @XmlElement(name = "cust_email", required = true)
     protected String custEmail;
 
-    
-    public Customer() {
-		super();
-	}
-
-	public Customer(int custID, String custFirstName, String custLastName, int custMobile, String custAddress,
-			String custEmail) {
-		super();
-		this.custID = custID;
-		this.custFirstName = custFirstName;
-		this.custLastName = custLastName;
-		this.custMobile = custMobile;
-		this.custAddress = custAddress;
-		this.custEmail = custEmail;
-	}
-
-	/**
+    /**
      * Gets the value of the custID property.
      * 
      */
