@@ -8,13 +8,13 @@ import java.sql.SQLException;
 
 public class Setup {
 	public static void main(String[] args) throws RemoteException, MalformedURLException, SQLException {
-		
+
 		DatabaseService s = new DatabaseServiceImpl();
-		
+
 		LocateRegistry.createRegistry(1099);
-		
+
 		Naming.rebind("Service", s);
-		
+
 		System.out.println("Server Ready");
 	}
 }

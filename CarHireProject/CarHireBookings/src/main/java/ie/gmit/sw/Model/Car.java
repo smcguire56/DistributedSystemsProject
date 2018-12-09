@@ -45,23 +45,23 @@ import java.util.Date;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "carID",
-    "car_colour",
-    "car_brand",
-    "car_model",
-    "car_PurchaseDate"
+    "carColour",
+    "carBrand",
+    "carModel",
+    "carPurchaseDate"
 })
 @XmlRootElement(name = "Car")
 public class Car implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	protected int carID;
-    @XmlElement(name = "car_colour", required = true)
+    @XmlElement(name = "carColour", required = true)
     protected String carColour;
-    @XmlElement(name = "car_brand", required = true)
+    @XmlElement(name = "carBrand", required = true)
     protected String carBrand;
-    @XmlElement(name = "car_model", required = true)
+    @XmlElement(name = "carModel", required = true)
     protected String carModel;
-    @XmlElement(name = "car_PurchaseDate", required = true)
+    @XmlElement(name = "carPurchaseDate", required = true)
     @XmlSchemaType(name = "date")
     protected Date carPurchaseDate;
     

@@ -105,7 +105,7 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 	@Override
 	public void createCar(int carID, String carColour, String carBrand, String carModel, String carPurchaseDate)
 			throws RemoteException, SQLException {
-		String sql = "insert into Orders(carID, carColour, carBrand, carModel, carPurchaseDate) values (?,?, ?, ?)";
+		String sql = "insert into car values (?,?, ?, ?, ?)";
 
 		PreparedStatement p = conn.prepareStatement(sql);
 		p.setInt(1, carID);
@@ -144,7 +144,6 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 	@Override
 	public void updateCar(int carID, String carColour, String carBrand, String carModel, String carPurchaseDated)
 			throws RemoteException, SQLException {
-		// carID | car_colour | car_brand | car_model | car_PurchaseDate
 
 		String sql = "UPDATE Car SET car_colour = ?, car_brand = ?, car_model = ?, car_PurchaseDate = ? WHERE carID = ?";
 
@@ -179,7 +178,8 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 		String str = "select * from customers order by custID";
 
 		ResultSet results = statement.executeQuery(str);
-		//  custID | cust_firstName | cust_lastName | cust_mobile | cust_address | cust_email
+		// custID | cust_firstName | cust_lastName | cust_mobile | cust_address |
+		// cust_email
 		while (results.next()) {
 			int custID = results.getInt("custID");
 			String custFirstName = results.getString("cust_firstName");
@@ -206,7 +206,7 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 	@Override
 	public void createCustomer(int custID, String custFirstName, String custLastName, int custMobile,
 			String custAddress, String custEmail) throws RemoteException, SQLException {
-		String sql = "insert into Customers(custID, custFirstName, custLastName, custMobile, custAddress, custEmail) values (?,?, ?, ?, ?)";
+		String sql = "insert into Customers values (?,?, ?, ?, ?, ?)";
 
 		PreparedStatement p = conn.prepareStatement(sql);
 		p.setInt(1, custID);
@@ -222,7 +222,7 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 	@Override
 	public void updateCustomer(int custID, String custFirstName, String custLastName, int custMobile,
 			String custAddress, String custEmail) throws RemoteException, SQLException {
-		String sql = "UPDATE Customers SET custFirstName = ?, custLastName = ?, custMobile = ?, custAddress = ?, custEmail = ? WHERE custID = ?";
+		String sql = "UPDATE Customers SET cust_firstName = ?, cust_lastName = ?, cust_mobile = ?, cust_address = ?, cust_email = ? WHERE custID = ?";
 
 		PreparedStatement p = conn.prepareStatement(sql);
 		p.setString(1, custFirstName);

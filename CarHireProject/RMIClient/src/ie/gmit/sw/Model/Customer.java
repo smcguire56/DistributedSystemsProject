@@ -5,7 +5,6 @@
 // Generated on: 2018.12.08 at 05:50:05 PM GMT 
 //
 
-
 package ie.gmit.sw.Model;
 
 import java.io.Serializable;
@@ -16,11 +15,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for anonymous complex type.
+ * <p>
+ * Java class for anonymous complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;complexType>
@@ -42,32 +43,24 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "custID",
-    "custFirstName",
-    "custLastName",
-    "custMobile",
-    "custAddress",
-    "custEmail"
-})
+@XmlType(name = "", propOrder = { "custID", "custFirstName", "custLastName", "custMobile", "custAddress", "custEmail" })
 @XmlRootElement(name = "Customer")
 public class Customer implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	protected int custID;
-    @XmlElement(name = "cust_firstName", required = true)
-    protected String custFirstName;
-    @XmlElement(name = "cust_lastName", required = true)
-    protected String custLastName;
-    @XmlElement(name = "cust_mobile")
-    protected int custMobile;
-    @XmlElement(name = "cust_address", required = true)
-    protected String custAddress;
-    @XmlElement(name = "cust_email", required = true)
-    protected String custEmail;
+	@XmlElement(name = "custFirstName", required = true)
+	protected String custFirstName;
+	@XmlElement(name = "custLastName", required = true)
+	protected String custLastName;
+	@XmlElement(name = "custMobile")
+	protected int custMobile;
+	@XmlElement(name = "custAddress", required = true)
+	protected String custAddress;
+	@XmlElement(name = "custEmail", required = true)
+	protected String custEmail;
 
-    
-    public Customer() {
+	public Customer() {
 		super();
 	}
 
@@ -83,131 +76,115 @@ public class Customer implements Serializable {
 	}
 
 	/**
-     * Gets the value of the custID property.
-     * 
-     */
-    public int getCustID() {
-        return custID;
-    }
+	 * Gets the value of the custID property.
+	 * 
+	 */
+	public int getCustID() {
+		return custID;
+	}
 
-    /**
-     * Sets the value of the custID property.
-     * 
-     */
-    public void setCustID(int value) {
-        this.custID = value;
-    }
+	/**
+	 * Sets the value of the custID property.
+	 * 
+	 */
+	public void setCustID(int value) {
+		this.custID = value;
+	}
 
-    /**
-     * Gets the value of the custFirstName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getCustFirstName() {
-        return custFirstName;
-    }
+	/**
+	 * Gets the value of the custFirstName property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getCustFirstName() {
+		return custFirstName;
+	}
 
-    /**
-     * Sets the value of the custFirstName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setCustFirstName(String value) {
-        this.custFirstName = value;
-    }
+	/**
+	 * Sets the value of the custFirstName property.
+	 * 
+	 * @param value allowed object is {@link String }
+	 * 
+	 */
+	public void setCustFirstName(String value) {
+		this.custFirstName = value;
+	}
 
-    /**
-     * Gets the value of the custLastName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getCustLastName() {
-        return custLastName;
-    }
+	/**
+	 * Gets the value of the custLastName property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getCustLastName() {
+		return custLastName;
+	}
 
-    /**
-     * Sets the value of the custLastName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setCustLastName(String value) {
-        this.custLastName = value;
-    }
+	/**
+	 * Sets the value of the custLastName property.
+	 * 
+	 * @param value allowed object is {@link String }
+	 * 
+	 */
+	public void setCustLastName(String value) {
+		this.custLastName = value;
+	}
 
-    /**
-     * Gets the value of the custMobile property.
-     * 
-     */
-    public int getCustMobile() {
-        return custMobile;
-    }
+	/**
+	 * Gets the value of the custMobile property.
+	 * 
+	 */
+	public int getCustMobile() {
+		return custMobile;
+	}
 
-    /**
-     * Sets the value of the custMobile property.
-     * 
-     */
-    public void setCustMobile(int value) {
-        this.custMobile = value;
-    }
+	/**
+	 * Sets the value of the custMobile property.
+	 * 
+	 */
+	public void setCustMobile(int value) {
+		this.custMobile = value;
+	}
 
-    /**
-     * Gets the value of the custAddress property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getCustAddress() {
-        return custAddress;
-    }
+	/**
+	 * Gets the value of the custAddress property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getCustAddress() {
+		return custAddress;
+	}
 
-    /**
-     * Sets the value of the custAddress property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setCustAddress(String value) {
-        this.custAddress = value;
-    }
+	/**
+	 * Sets the value of the custAddress property.
+	 * 
+	 * @param value allowed object is {@link String }
+	 * 
+	 */
+	public void setCustAddress(String value) {
+		this.custAddress = value;
+	}
 
-    /**
-     * Gets the value of the custEmail property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getCustEmail() {
-        return custEmail;
-    }
+	/**
+	 * Gets the value of the custEmail property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getCustEmail() {
+		return custEmail;
+	}
 
-    /**
-     * Sets the value of the custEmail property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setCustEmail(String value) {
-        this.custEmail = value;
-    }
+	/**
+	 * Sets the value of the custEmail property.
+	 * 
+	 * @param value allowed object is {@link String }
+	 * 
+	 */
+	public void setCustEmail(String value) {
+		this.custEmail = value;
+	}
 
 }
