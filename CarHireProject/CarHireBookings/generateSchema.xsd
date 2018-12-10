@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://sw.gmit.ie/Model/"
+	xmlns:tns="http://sw.gmit.ie/Model/"
+	elementFormDefault="qualified">
+
+	<element name="Order">
+		<complexType>
+			<sequence>
+				<element name="OrderID" type="int"></element>
+				<element name="Date" type="date"></element>
+				<element name="car" type="int"></element>
+				<element name="cust" type="int"></element>
+			</sequence>
+		</complexType>
+	</element>
+
+ <!--  public Car(int carID, String car_colour, String car_brand, String car_model, Date car_PurchaseDate)  -->
+	<element name="Car">
+		<complexType>
+			<sequence>
+				<element name="carID" type="int"></element>
+				<element name="car_colour" type="string"></element>
+				<element name="car_brand" type="string"></element>
+				<element name="car_model" type="string"></element>
+				<element name="car_PurchaseDate" type="date"></element>
+			</sequence>
+		</complexType>
+	</element>
+	 
+	<!-- public Customer(int custID, String cust_firstName, String cust_lastName, int cust_mobile, String cust_address,
+			String cust_email) -->
+	<element name="Customer">
+		<complexType>
+			<sequence>
+				<element name="custID" type="int"></element>
+				<element name="cust_firstName" type="string"></element>
+				<element name="cust_lastName" type="string"></element>
+				<element name="cust_mobile" type="int"></element>
+				<element name="cust_address" type="string"></element>
+				<element name="cust_email" type="string"></element>
+			</sequence>
+		</complexType>
+	</element>
+	
+	
+</schema>

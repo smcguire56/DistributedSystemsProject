@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -34,14 +35,18 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 	// ###############################################################################################################################
 
 	@Override
-	public void createOrder(int orderId, String date, int custId, int carId) throws RemoteException, SQLException {
-		String sql = "insert into Orders(orderId, Date, CustID, CarID) values (?,?, ?, ?)";
+	public void createOrder(Date date, int custId, int carId) throws RemoteException, SQLException {
+		String sql = "insert into Orders (Date, CustID, CarID) values (?, ?, ?)";
+
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		String newDate = format.format(new Date());
+
+		System.out.println(newDate);
 
 		PreparedStatement p = conn.prepareStatement(sql);
-		p.setInt(1, orderId);
-		p.setString(2, date);
-		p.setInt(3, custId);
-		p.setInt(4, carId);
+		p.setString(1, newDate);
+		p.setInt(2, custId);
+		p.setInt(3, carId);
 		p.execute();
 		p.close();
 	}
@@ -70,19 +75,17 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 	}
 
 	@Override
-	public void updateOrder(int orderId, int custId, int carId, String date) throws RemoteException, SQLException { // update
-																													// date
+	public void updateOrder(int orderId, int custId, int carId, Date date) throws RemoteException, SQLException {
 
-		System.out.println("Order ID: " + orderId);
-		System.out.println("Customer ID: " + custId);
-		System.out.println("car ID: " + carId);
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		String newDate = format.format(new Date());
 
 		String sql = "UPDATE Orders SET custId = ?, carId = ?, Date = ? WHERE orderId = ?";
 
 		PreparedStatement p = conn.prepareStatement(sql);
 		p.setInt(1, custId);
 		p.setInt(2, carId);
-		p.setString(3, date);
+		p.setString(3, newDate);
 		p.setInt(4, orderId);
 		p.execute();
 		p.close();
@@ -103,16 +106,20 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 	// ###############################################################################################################################
 
 	@Override
-	public void createCar(int carID, String carColour, String carBrand, String carModel, String carPurchaseDate)
+	public void createCar(String carColour, String carBrand, String carModel, Date carPurchaseDate)
 			throws RemoteException, SQLException {
-		String sql = "insert into car values (?,?, ?, ?, ?)";
+		String sql = "insert into car (car_colour, car_brand, car_model, car_PurchaseDate) values (?, ?, ?, ?)";
+
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		String newDate = format.format(new Date());
+
+		System.out.println(newDate);
 
 		PreparedStatement p = conn.prepareStatement(sql);
-		p.setInt(1, carID);
-		p.setString(2, carColour);
-		p.setString(3, carBrand);
-		p.setString(4, carModel);
-		p.setString(5, carPurchaseDate);
+		p.setString(1, carColour);
+		p.setString(2, carBrand);
+		p.setString(3, carModel);
+		p.setString(4, newDate);
 		p.execute();
 		p.close();
 	}
@@ -126,7 +133,6 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 		String str = "select * from car order by carID";
 
 		ResultSet results = statement.executeQuery(str);
-		// carID | car_colour | car_brand | car_model | car_PurchaseDate
 		while (results.next()) {
 			int carID = results.getInt("carID");
 			String carColour = results.getString("car_colour");
@@ -142,16 +148,21 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 	}
 
 	@Override
-	public void updateCar(int carID, String carColour, String carBrand, String carModel, String carPurchaseDated)
+	public void updateCar(int carID, String carColour, String carBrand, String carModel, Date carPurchaseDated)
 			throws RemoteException, SQLException {
 
 		String sql = "UPDATE Car SET car_colour = ?, car_brand = ?, car_model = ?, car_PurchaseDate = ? WHERE carID = ?";
+
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		String newDate = format.format(new Date());
+
+		System.out.println(newDate);
 
 		PreparedStatement p = conn.prepareStatement(sql);
 		p.setString(1, carColour);
 		p.setString(2, carBrand);
 		p.setString(3, carModel);
-		p.setString(4, carPurchaseDated);
+		p.setString(4, newDate);
 		p.setInt(5, carID);
 		p.execute();
 		p.close();
@@ -178,8 +189,7 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 		String str = "select * from customers order by custID";
 
 		ResultSet results = statement.executeQuery(str);
-		// custID | cust_firstName | cust_lastName | cust_mobile | cust_address |
-		// cust_email
+
 		while (results.next()) {
 			int custID = results.getInt("custID");
 			String custFirstName = results.getString("cust_firstName");
@@ -190,6 +200,10 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 
 			Customer s = new Customer(custID, custFirstName, custLastName, custMobile, custAddress, custEmail);
 			list.add(s);
+		}
+
+		for (Customer customer : list) {
+			System.out.println(customer.getCustAddress());
 		}
 
 		return list;
@@ -204,17 +218,16 @@ public class DatabaseServiceImpl extends UnicastRemoteObject implements Database
 	}
 
 	@Override
-	public void createCustomer(int custID, String custFirstName, String custLastName, int custMobile,
-			String custAddress, String custEmail) throws RemoteException, SQLException {
-		String sql = "insert into Customers values (?,?, ?, ?, ?, ?)";
+	public void createCustomer(String custFirstName, String custLastName, int custMobile, String custAddress,
+			String custEmail) throws RemoteException, SQLException {
+		String sql = "insert into Customers (cust_firstName, cust_lastName, cust_mobile, cust_address, cust_email) values (?, ?, ?, ?, ?)";
 
 		PreparedStatement p = conn.prepareStatement(sql);
-		p.setInt(1, custID);
-		p.setString(2, custFirstName);
-		p.setString(3, custLastName);
-		p.setInt(4, custMobile);
-		p.setString(5, custAddress);
-		p.setString(6, custEmail);
+		p.setString(1, custFirstName);
+		p.setString(2, custLastName);
+		p.setInt(3, custMobile);
+		p.setString(4, custAddress);
+		p.setString(5, custEmail);
 		p.execute();
 		p.close();
 	}

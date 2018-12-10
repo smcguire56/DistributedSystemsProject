@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS Orders (
 	FOREIGN KEY (CarID) REFERENCES car(CarID)
 );
 
- INSERT INTO Customers (cust_firstName, cust_lastName, cust_mobile, cust_address, cust_email)
+INSERT INTO Customers (cust_firstName, cust_lastName, cust_mobile, cust_address, cust_email)
 VALUES ('sean','mcguire','123456789','galway','seanmcguire@gmail.ie'),
 	   ('john','smith','987654321','dublin','johnsmith@hotmail.ie'),
 	   ('Jim','hill','35796789942','cork','banana@gmail.com');
