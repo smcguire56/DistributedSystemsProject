@@ -6,7 +6,7 @@ tests are finished in:
 https://www.getpostman.com/collections/fbda7515836ebed0efad 
 
 
-## Installtation 
+## Installation 
 Firstly, clone this repo:
 
   ```
